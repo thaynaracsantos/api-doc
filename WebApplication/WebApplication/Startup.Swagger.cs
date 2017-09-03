@@ -5,6 +5,7 @@ using Microsoft.Extensions.PlatformAbstractions;
 using Swashbuckle.AspNetCore.Swagger;
 using System.IO;
 using System.Reflection;
+using Microsoft.Extensions.Configuration;
 
 namespace WebApplication
 {
@@ -12,15 +13,22 @@ namespace WebApplication
     {
         private void ConfigureSwaggerService(IServiceCollection services)
         {
+            SwaggerInfo info = Configuration.GetSection("SwaggerInfo").Get<SwaggerInfo>();
+
             services.AddSwaggerGen(options =>
             {
-                options.SwaggerDoc("v1",
+                options.SwaggerDoc(info.Version,
                     new Info
                     {
-                        Title = "Web API",
-                        Version = "v1",
-                        Description = "Web API Description",
-                        TermsOfService = "Terms of service"
+                        Title = info.Title,
+                        Version = info.Version,
+                        Description = info.Description,
+                        TermsOfService = info.TermsOfService,
+                        Contact = new Contact
+                        {
+                            Name = info.ContactEmail,
+                            Email = info.ContactName
+                        }
                     }
                  );
 

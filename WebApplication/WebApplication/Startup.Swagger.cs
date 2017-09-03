@@ -12,9 +12,7 @@ namespace WebApplication
     public partial class Startup
     {
         private void ConfigureSwaggerService(IServiceCollection services)
-        {
-            SwaggerInfo info = Configuration.GetSection("SwaggerInfo").Get<SwaggerInfo>();            
-
+        {                     
             services.AddSwaggerGen(options =>
             {
                 string basePath = PlatformServices.Default.Application.ApplicationBasePath;
@@ -22,12 +20,10 @@ namespace WebApplication
                 string filePath = Path.Combine(basePath, moduleName);
                 string readme = File.ReadAllText(Path.Combine(basePath, "README.md"));
 
-                options.AddSecurityDefinition("Authentication", new ApiKeyScheme() {
-                    In = "header",
-                    Description = "Authentication description",
-                    Name = "Authorization",
-                    Type = "key" });
+                ApiKeyScheme scheme = Configuration.GetSection("ApiKeyScheme").Get<ApiKeyScheme>();
+                options.AddSecurityDefinition("Authentication", scheme);
 
+                SwaggerInfo info = Configuration.GetSection("SwaggerInfo").Get<SwaggerInfo>();
                 options.SwaggerDoc(info.Version,
                     new Info
                     {

@@ -13,16 +13,21 @@ namespace WebApplication
     {
         private void ConfigureSwaggerService(IServiceCollection services)
         {
-            SwaggerInfo info = Configuration.GetSection("SwaggerInfo").Get<SwaggerInfo>();
+            SwaggerInfo info = Configuration.GetSection("SwaggerInfo").Get<SwaggerInfo>();            
 
             services.AddSwaggerGen(options =>
             {
+                string basePath = PlatformServices.Default.Application.ApplicationBasePath;
+                string moduleName = GetType().GetTypeInfo().Module.Name.Replace(".dll", ".xml");
+                string filePath = Path.Combine(basePath, moduleName);
+                string readme = File.ReadAllText(Path.Combine(basePath, "README.md"));
+
                 options.SwaggerDoc(info.Version,
                     new Info
                     {
                         Title = info.Title,
                         Version = info.Version,
-                        Description = info.Description,
+                        Description = readme,
                         TermsOfService = info.TermsOfService,
                         Contact = new Contact
                         {
@@ -31,10 +36,6 @@ namespace WebApplication
                         }
                     }
                  );
-
-                string basePath = PlatformServices.Default.Application.ApplicationBasePath;
-                string moduleName = GetType().GetTypeInfo().Module.Name.Replace(".dll", ".xml");
-                string filePath = Path.Combine(basePath, moduleName);
 
                 options.IncludeXmlComments(filePath);
                 options.DescribeAllEnumsAsStrings();

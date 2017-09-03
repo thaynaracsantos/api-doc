@@ -22,6 +22,12 @@ namespace WebApplication
                 string filePath = Path.Combine(basePath, moduleName);
                 string readme = File.ReadAllText(Path.Combine(basePath, "README.md"));
 
+                options.AddSecurityDefinition("Authentication", new ApiKeyScheme() {
+                    In = "header",
+                    Description = "Authentication description",
+                    Name = "Authorization",
+                    Type = "key" });
+
                 options.SwaggerDoc(info.Version,
                     new Info
                     {

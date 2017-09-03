@@ -11,7 +11,7 @@ using Microsoft.Extensions.Options;
 
 namespace WebApplication
 {
-    public class Startup
+    public partial class Startup
     {
         public Startup(IConfiguration configuration)
         {
@@ -23,6 +23,7 @@ namespace WebApplication
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            ConfigureSwaggerService(services);
             services.AddMvc();
         }
 
@@ -34,6 +35,7 @@ namespace WebApplication
                 app.UseDeveloperExceptionPage();
             }
 
+            ConfigureSwagger(app, env);
             app.UseMvc();
         }
     }

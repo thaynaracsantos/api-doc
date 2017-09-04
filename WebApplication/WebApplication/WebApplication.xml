@@ -4,5 +4,47 @@
         <name>WebApplication</name>
     </assembly>
     <members>
-	</members>
+        <member name="T:WebApplication.Controllers.HousesController">
+            <summary>
+            Control all house actions
+            </summary>
+        </member>
+        <member name="M:WebApplication.Controllers.HousesController.Get">
+            <summary>
+            List all houses
+            </summary>
+            <returns>Collection of houses</returns>
+            <response code="200">Collection of houses</response> 
+        </member>
+        <member name="M:WebApplication.Controllers.HousesController.Get(System.Int32)">
+            <summary>
+            Get a house
+            </summary>
+            <param name="id">House identifier</param>
+            <returns>House</returns>
+            <response code="200">The house for the <paramref name="id"/>.</response>
+        </member>
+        <member name="M:WebApplication.Controllers.HousesController.Post(WebApplication.Models.House)">
+            <summary>
+            Create a house
+            </summary>
+            <param name="house"></param>
+            <response code="200">House created</response>
+        </member>
+        <member name="M:WebApplication.Controllers.HousesController.Put(System.Int32,WebApplication.Models.House)">
+            <summary>
+            Update a house
+            </summary>
+            <param name="id">House identifier</param>
+            <param name="house">House parameters</param>
+            <response code="200">House updated</response>
+        </member>
+        <member name="M:WebApplication.Controllers.HousesController.Delete(System.Int32)">
+            <summary>
+            Delete a house
+            </summary>
+            <param name="id">House identifier</param>
+            <response code="200">House deleted</response>
+        </member>
+    </members>
 </doc>

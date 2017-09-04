@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Net;
 using WebApplication.ModelExamples;
 using WebApplication.Models;
+using WebApplication.Swagger;
 
 namespace WebApplication.Controllers
 {
@@ -21,7 +22,7 @@ namespace WebApplication.Controllers
         /// <response code="200">Collection of houses</response> 
         [HttpGet]        
         [Produces("application/json", Type = typeof(IEnumerable<House>))]
-        [SwaggerResponse((int)HttpStatusCode.OK, Type = typeof(IEnumerable<House>))]
+        [SwaggerResponse((int)HttpStatusCode.OK, Type = typeof(IEnumerable<House>))]        
         public IEnumerable<House> Get()
         {
             return new House[] { new House { Id = 1, Color = "Blue", Address = "Street 1", NumberOfWindows = 2 } };
@@ -75,6 +76,7 @@ namespace WebApplication.Controllers
         /// <response code="200">House deleted</response>
         [HttpDelete("{id}")]
         [SwaggerResponse((int)HttpStatusCode.OK)]
+        [HideInDocsAttribute]
         public void Delete(int id)
         {
             //Delete House

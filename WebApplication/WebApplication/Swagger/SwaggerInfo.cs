@@ -1,4 +1,4 @@
-﻿namespace WebApplication
+﻿namespace WebApplication.Swagger
 {
     public class SwaggerInfo
     {

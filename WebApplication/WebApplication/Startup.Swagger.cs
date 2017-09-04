@@ -6,6 +6,7 @@ using Swashbuckle.AspNetCore.Swagger;
 using System.IO;
 using System.Reflection;
 using Microsoft.Extensions.Configuration;
+using Swashbuckle.AspNetCore.Examples;
 
 namespace WebApplication
 {
@@ -41,6 +42,7 @@ namespace WebApplication
 
                 options.IncludeXmlComments(filePath);
                 options.DescribeAllEnumsAsStrings();
+                options.OperationFilter<ExamplesOperationFilter>();
             });
         }
 

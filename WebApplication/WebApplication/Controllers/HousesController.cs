@@ -1,10 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Swashbuckle.AspNetCore.Examples;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
+using WebApplication.ModelExamples;
 using WebApplication.Models;
 
 namespace WebApplication.Controllers
@@ -20,7 +22,7 @@ namespace WebApplication.Controllers
         /// </summary>
         /// <returns>Collection of houses</returns>
         /// <response code="200">Collection of houses</response> 
-        [HttpGet]
+        [HttpGet]        
         [Produces("application/json", Type = typeof(IEnumerable<House>))]
         [SwaggerResponse((int)HttpStatusCode.OK, Type = typeof(IEnumerable<House>))]
         public IEnumerable<House> Get()
@@ -48,8 +50,9 @@ namespace WebApplication.Controllers
         /// <param name="house"></param>
         /// <response code="200">House created</response>
         [HttpPost]
+        [SwaggerRequestExample(typeof(HouseCreate), typeof(HouseCreateExample))]
         [SwaggerResponse((int)HttpStatusCode.OK)]
-        public void Post([FromBody]House house)
+        public void Post([FromBody]HouseCreate house)
         {
             //Add House
         }
@@ -61,8 +64,9 @@ namespace WebApplication.Controllers
         /// <param name="house">House parameters</param>
         /// <response code="200">House updated</response>
         [HttpPut("{id}")]
+        [SwaggerRequestExample(typeof(HouseUpdate), typeof(HouseUpdateExample))]
         [SwaggerResponse((int)HttpStatusCode.OK)]
-        public void Put(int id, [FromBody]House house)
+        public void Put(int id, [FromBody]HouseUpdate house)
         {
             //Update House
         }

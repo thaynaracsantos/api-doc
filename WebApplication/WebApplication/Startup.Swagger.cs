@@ -25,21 +25,8 @@ namespace WebApplication
                 ApiKeyScheme scheme = Configuration.GetSection("ApiKeyScheme").Get<ApiKeyScheme>();
                 options.AddSecurityDefinition("Authentication", scheme);
 
-                SwaggerInfo info = Configuration.GetSection("SwaggerInfo").Get<SwaggerInfo>();
-                options.SwaggerDoc(info.Version,
-                    new Info
-                    {
-                        Title = info.Title,
-                        Version = info.Version,
-                        Description = readme,
-                        TermsOfService = info.TermsOfService,
-                        Contact = new Contact
-                        {
-                            Name = info.ContactEmail,
-                            Email = info.ContactName
-                        }
-                    }
-                 );
+                Info info = Configuration.GetSection("Info").Get<Info>();
+                options.SwaggerDoc(info.Version, info);
 
                 options.IncludeXmlComments(filePath);
                 options.DescribeAllEnumsAsStrings();

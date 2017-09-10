@@ -26,6 +26,7 @@ namespace WebApplication
                 options.AddSecurityDefinition("Authentication", scheme);
 
                 Info info = Configuration.GetSection("Info").Get<Info>();
+                info.Description = readme;
                 options.SwaggerDoc(info.Version, info);
 
                 options.IncludeXmlComments(filePath);
